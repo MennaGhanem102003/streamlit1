@@ -1,8 +1,0 @@
-pandasai==1.5.8
-streamlit
-pandas
-python-dotenv
-numpy
-scikit-learn
-tabulate
-openai
