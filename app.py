@@ -4,11 +4,7 @@ import pandas as pd
 from pandasai.smart_dataframe import SmartDataframe
 from pandasai.llm.openai import OpenAI
 from vanna.remote import VannaDefault
-
-# --- Streamlit Page Configuration ---
 st.set_page_config(page_title="Automated Analysis", layout="centered", initial_sidebar_state="expanded")
-
-# --- Custom Dark Theme Styling ---
 st.markdown("""
     <style>
         body, .stApp {
@@ -30,11 +26,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.title("🤖 Automated Data Analysis Assistant")
-
-# --- Sidebar: Choose Engine ---
 engine = st.sidebar.radio("🧠 Choose Analysis Engine", ("PandasAI", "Vanna"))
-
-# --- Upload CSV File ---
 uploaded_file = st.file_uploader("📂 Upload your CSV file", type=["csv"])
 
 if uploaded_file:
@@ -56,10 +48,10 @@ if uploaded_file:
             with st.spinner("⚡ PandasAI is analyzing..."):
                 try:
                     response = smart_df.chat(user_question)
-                    st.success("✅ Answer:")
+                    st.success("Answer:")
                     st.write(response)
                 except Exception as e:
-                    st.error(f"❌ Error: {e}")
+                    st.error(f"Error: {e}")
 
     elif engine == "Vanna":
         @st.cache_resource
@@ -71,12 +63,12 @@ if uploaded_file:
         vanna = init_vanna()
 
         if user_question:
-            with st.spinner("⚡ Vanna is analyzing..."):
+            with st.spinner("Vanna is analyzing..."):
                 try:
                     response = vanna.ask(user_question, visualize=False)
-                    st.success("✅ Answer:")
+                    st.success(" Answer:")
                     st.write(response)
                 except Exception as e:
-                    st.error(f"❌ Error: {e}")
+                    st.error(f"Error: {e}")
 else:
     st.info("📤 Please upload a CSV file to begin.")
